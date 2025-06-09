@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <p class="ls"> </p>
+    <div id="start">
+        <h1>Snake & Ladder</h1>
+        <div class="game">
+            <script>
+                let k;
+            for (let i = 1; i <= 100;) {
+                    for(let j=0;j<5;j++){
+                    let div = document.createElement('div');
+                    div.className = 'box1';
+                    div.innerText="" + (100-i+1);
+                    k=100-i+1;
+                    div.id=`ind${k}`;
+                    document.querySelector('.game').appendChild(div);
+                    i++;
+                    let div2 = document.createElement('div');
+                    div2.className = 'box2';
+                    div2.innerText="" + (100-i+1);
+                    k=100-i+1;
+                    div2.id=`ind${k}`;
+                    document.querySelector('.game').appendChild(div2);
+                    i++;
+                    }
+                    let d=i;
+                    for(let j=0;j<5;j++){
+                    let div = document.createElement('div');
+                    div.className = 'box2';
+                    div.innerText=""  + (101-d-9+2*j);
+                    k=101-d-9+2*j;
+                    div.id=`ind${k}`;
+                    document.querySelector('.game').appendChild(div);
+                    i++;
+                    let div2 = document.createElement('div');
+                    div2.className = 'box1';
+                    div2.innerText=""  + (101-d-8+2*j);
+                    k=101-d-8+2*j;
+                    div2.id=`ind${k}`;
+                    document.querySelector('.game').appendChild(div2);
+                    i++;
+                    }
+                }
+            </script>
+            <button class="dice">6</button>
+            <p class="turn">P1 turn</p>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

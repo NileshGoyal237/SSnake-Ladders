@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: cornsilk;
+  text-align: center;
+  color :coral ;
+}
+.game{
+    display: grid;
+    grid-template-columns: repeat(10, 50px); /* 10 columns, each 20px wide */
+    grid-template-rows: repeat(10, 50px);    /* 10 rows, each 20px tall */
+    gap: 0px; /* Optional spacing between boxes */
+    margin: 50px;
+    text-align: center;
+    color :cornsilk;
+    justify-content: center;
+    align-items: center;
+}
+.box1{
+      width: 50px;
+      height: 50px;
+      background-color: rgb(39, 132, 163); 
+}
+.box2{
+      width: 50px;
+      height: 50px;
+      background-color: rgb(235, 93, 107); 
+}
+.dice{
+    display: flex;
+    width : 75px;
+    height: 75px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    color :rgb(0, 0, 0);
+    font-size: 50px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 1rem;
+}
+.ls{
+    font-size: 7px;
+}
+.turn{
+    color:coral;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+    margin-top:20px;
+}

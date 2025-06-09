@@ -1,0 +1,126 @@
+let cp1 = 0;
+let cp2 = 0;
+let arr = [];
+
+for (let i = 1; i <= 100; i++) {
+    arr[i] = document.querySelector(`#ind${i}`);
+}
+let dice=document.querySelector(".dice");
+let turn=document.querySelector(".turn");
+//first ladder
+let LO1= document.querySelector("#ind5");
+const lopen1= document.createElement('p');
+lopen1.className = 'ls';
+lopen1.innerText="LO1";
+LO1.appendChild(lopen1);
+let LC1= document.querySelector("#ind87");
+const lClose1= document.createElement('p');
+lClose1.className = 'ls';
+lClose1.innerText="LC1";
+LC1.appendChild(lClose1);
+//second ladder
+let LO2= document.querySelector("#ind18");
+const lopen2= document.createElement('p');
+lopen2.className = 'ls';
+lopen2.innerText="LO2";
+LO2.appendChild(lopen2);
+let LC2= document.querySelector("#ind45");
+const lClose2= document.createElement('p');
+lClose2.className = 'ls';
+lClose2.innerText="LC2";
+LC2.appendChild(lClose2);
+//third ladder
+let LO3= document.querySelector("#ind51");
+const lopen3= document.createElement('p');
+lopen3.className = 'ls';
+lopen3.innerText="LO3";
+LO3.appendChild(lopen3);
+let LC3= document.querySelector("#ind79");
+const lClose3= document.createElement('p');
+lClose3.className = 'ls';
+lClose3.innerText="LC3";
+LC3.appendChild(lClose3);
+//first snake
+let SO1= document.querySelector("#ind98");
+const sopen1= document.createElement('p');
+sopen1.className = 'ls';
+sopen1.innerText="SO1";
+SO1.appendChild(sopen1);
+let SC1= document.querySelector("#ind7");
+const sClose1= document.createElement('p');
+sClose1.className = 'ls';
+sClose1.innerText="SC1";
+SC1.appendChild(sClose1);
+//second snake
+let SO2= document.querySelector("#ind69");
+const sopen2= document.createElement('p');
+sopen2.className = 'ls';
+sopen2.innerText="SO2";
+SO2.appendChild(sopen2);
+let SC2= document.querySelector("#ind33");
+const sClose2= document.createElement('p');
+sClose2.className = 'ls';
+sClose2.innerText="SC2";
+SC2.appendChild(sClose2);
+//working
+function diceRoll(){
+    let val = Math.floor(Math.random() * 6) + 1;
+    dice.innerText=`${val}`;
+    return val;
+}
+let bool = true;
+function player1(itsTime){
+    if(cp1+itsTime>100){
+        turn.innerText="P2 turns";
+        bool=false;
+        return;
+    }
+    if(cp1+itsTime==100){
+        turn.innerText="Game ends,winner P1";
+        return;
+    }
+    arr[cp1].innerText = `${cp1}`;
+    cp1=cp1+itsTime;
+    arr[cp1].innerText += "P1";
+    if(cp1==cp2 && cp1!=0){
+        arr[cp2].innerText=cp2;
+        cp2=0;
+    }
+    if(itsTime==6){
+        itsTime=diceRoll();
+        player1(itsTime);
+    }
+    bool=false;
+}
+function player2(itsTime){
+    if(cp2+itsTime>100){
+        turn.innerText="P1 turns";
+        return;
+    }
+    else if(cp2+itsTime==100){
+        turn.innerText="Game ends,winner P2";
+        return;
+    }
+    else{
+        arr[cp2].innerText=`${cp2}`;
+        cp2=cp2+itsTime;
+        arr[cp2].innerText += "P2";
+    }
+    if(cp1==cp2 && cp1!=0){
+        arr[cp1].innerText=cp1;
+        cp1=0;
+    }
+    if(itsTime==6){
+        itsTime=diceRoll();
+        player2(itsTime);
+    }
+    bool=true;
+}
+dice.addEventListener("click",()=>{
+    let itsTime=diceRoll();
+    if(bool){ 
+        player1(itsTime);
+    }else{
+         player2(itsTime);
+    }
+});

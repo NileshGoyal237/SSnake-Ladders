@@ -9,6 +9,7 @@ arr[cp1].innerText += "\nP1";
 arr[cp2].innerText += "\nP2";
 let dice=document.querySelector(".dice");
 let turn=document.querySelector(".turn");
+let rstBtn=document.querySelector(".rst");
 //first ladder
 let LO1= document.querySelector("#ind5");
 const lopen1= document.createElement('p');
@@ -88,12 +89,25 @@ function defi(){
     LO1.appendChild(lopen1);
 }
 //working
+let bool=true;
+function resetGame(){
+    arr[cp1].innerText = `${cp1}`;
+    arr[cp2].innerText = `${cp2}`;
+    defi();
+    cp1=1;
+    cp2=1;
+    arr[1].innerText += "\nP1\nP2";
+    rstBtn.innerText="Reset Game";
+    bool=true;
+    dice.disabled=false;
+    arr[100].innerText="100";
+    turn.innerText="P1 turn";
+}
 function diceRoll(){
     let val = Math.floor(Math.random() * 6) + 1;
     dice.innerText=`${val}`;
     return val;
 }
-let bool = true;
 function player1(itsTime){
     if(cp1+itsTime>100){
         turn.innerText="P2 turns";
@@ -101,8 +115,14 @@ function player1(itsTime){
         return;
     }
     arr[cp1].innerText = `${cp1}`;
+    if(cp2==1 && cp1==1){
+        arr[cp2].innerText += "\nP2"
+    }
     if(cp1+itsTime==100){
         turn.innerText="Game ends,winner P1";
+        arr[100].innerText += "\nWinner\nP1";
+        rstBtn.innerText="Start new game";
+        dice.disabled=true;
         return;
     }
     cp1=cp1+itsTime;
@@ -111,7 +131,11 @@ function player1(itsTime){
     if(cp1==51)cp1=79;
     if(cp1==98)cp1=7;
     if(cp1==69)cp1=33;
-    arr[cp1].innerText += "\nP1";
+    if(cp1==87 || cp1==45 || cp1==79 || cp1==7 || cp1==33){
+        arr[cp1].innerText = `${cp1} P1`;
+        defi();
+    }
+    else arr[cp1].innerText += "\nP1";
     if(cp1==cp2 && cp1!=1){
         arr[cp2].innerText=cp2 + "\nP1";
         cp2=1;
@@ -134,8 +158,14 @@ function player2(itsTime){
         return;
     }
     arr[cp2].innerText=`${cp2}`;
+    if(cp2==1 && cp1==1){
+        arr[cp2].innerText += "\nP1"
+    }
     if(cp2+itsTime==100){
         turn.innerText="Game ends,winner P2";
+        arr[100].innerText += "\nWinner\nP1";
+        rstBtn.innerText="Start new game";
+        dice.disabled=true;
         return;
     }
     cp2=cp2+itsTime;
@@ -144,7 +174,11 @@ function player2(itsTime){
     if(cp2==51)cp2=79;
     if(cp2==98)cp2=7;
     if(cp2==69)cp2=33;
-    arr[cp2].innerText += "\nP2";
+    if(cp2==87 || cp2==45 || cp2==79 || cp2==7 || cp2==33){
+        arr[cp2].innerText = `${cp2} P2`;
+        defi();
+    }
+    else arr[cp2].innerText += "\nP2";
     
     if(cp1==cp2 && cp1!=1){
         arr[cp1].innerText=cp1 + "\nP2";
@@ -169,4 +203,7 @@ dice.addEventListener("click",()=>{
     }else{
         player2(itsTime);
     }
+});
+rstBtn.addEventListener("click",()=>{
+    resetGame();
 });

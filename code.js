@@ -75,12 +75,17 @@ function player1(itsTime){
         bool=false;
         return;
     }
+    arr[cp1].innerText = `${cp1}`;
     if(cp1+itsTime==100){
         turn.innerText="Game ends,winner P1";
         return;
     }
-    arr[cp1].innerText = `${cp1}`;
     cp1=cp1+itsTime;
+    if(cp1==5)cp1=87;
+    if(cp1==18)cp1=45;
+    if(cp1==51)cp1=79;
+    if(cp1==98)cp1=7;
+    if(cp1==69)cp1=33;
     arr[cp1].innerText += "P1";
     if(cp1==cp2 && cp1!=0){
         arr[cp2].innerText=cp2;
@@ -90,6 +95,7 @@ function player1(itsTime){
         itsTime=diceRoll();
         player1(itsTime);
     }
+    turn.innerText="P2 turn"
     bool=false;
 }
 function player2(itsTime){
@@ -97,15 +103,19 @@ function player2(itsTime){
         turn.innerText="P1 turns";
         return;
     }
-    else if(cp2+itsTime==100){
+    arr[cp2].innerText=`${cp2}`;
+    if(cp2+itsTime==100){
         turn.innerText="Game ends,winner P2";
         return;
     }
-    else{
-        arr[cp2].innerText=`${cp2}`;
-        cp2=cp2+itsTime;
-        arr[cp2].innerText += "P2";
-    }
+    cp2=cp2+itsTime;
+    if(cp2==5)cp2=87;
+    if(cp2==18)cp2=45;
+    if(cp2==51)cp2=79;
+    if(cp2==98)cp2=7;
+    if(cp2==69)cp2=33;
+    arr[cp2].innerText += "P2";
+    
     if(cp1==cp2 && cp1!=0){
         arr[cp1].innerText=cp1;
         cp1=0;
@@ -114,6 +124,7 @@ function player2(itsTime){
         itsTime=diceRoll();
         player2(itsTime);
     }
+    turn.innerText="P1 turn";
     bool=true;
 }
 dice.addEventListener("click",()=>{
@@ -121,6 +132,6 @@ dice.addEventListener("click",()=>{
     if(bool){ 
         player1(itsTime);
     }else{
-         player2(itsTime);
+        player2(itsTime);
     }
 });

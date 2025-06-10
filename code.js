@@ -1,5 +1,5 @@
-let cp1 = 0;
-let cp2 = 0;
+let cp1 = 1;
+let cp2 = 1;
 let arr = [];
 
 for (let i = 1; i <= 100; i++) {

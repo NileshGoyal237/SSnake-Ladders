@@ -5,6 +5,8 @@ let arr = [];
 for (let i = 1; i <= 100; i++) {
     arr[i] = document.querySelector(`#ind${i}`);
 }
+arr[cp1].innerText += "\nP1";
+arr[cp2].innerText += "\nP2";
 let dice=document.querySelector(".dice");
 let turn=document.querySelector(".turn");
 //first ladder
@@ -62,6 +64,29 @@ const sClose2= document.createElement('p');
 sClose2.className = 'ls';
 sClose2.innerText="SC2";
 SC2.appendChild(sClose2);
+//write snake and ladder
+function defi(){
+    sClose2.innerText="SC2";
+    SC2.appendChild(sClose2);
+    sopen2.innerText="SO2";
+    SO2.appendChild(sopen2);
+    sClose1.innerText="SC1";
+    SC1.appendChild(sClose1);
+    sopen1.innerText="SO1";
+    SO1.appendChild(sopen1);
+    lClose3.innerText="LC3";
+    LC3.appendChild(lClose3);
+    lopen3.innerText="LO3";
+    LO3.appendChild(lopen3);
+    lClose2.innerText="LC2";
+    LC2.appendChild(lClose2);
+    lopen2.innerText="LO2";
+    LO2.appendChild(lopen2);
+    lClose1.innerText="LC1";
+    LC1.appendChild(lClose1);
+    lopen1.innerText="LO1";
+    LO1.appendChild(lopen1);
+}
 //working
 function diceRoll(){
     let val = Math.floor(Math.random() * 6) + 1;
@@ -86,17 +111,22 @@ function player1(itsTime){
     if(cp1==51)cp1=79;
     if(cp1==98)cp1=7;
     if(cp1==69)cp1=33;
-    arr[cp1].innerText += "P1";
-    if(cp1==cp2 && cp1!=0){
-        arr[cp2].innerText=cp2;
-        cp2=0;
+    arr[cp1].innerText += "\nP1";
+    if(cp1==cp2 && cp1!=1){
+        arr[cp2].innerText=cp2 + "\nP1";
+        cp2=1;
+        arr[cp2].innerText += "P2";
     }
     if(itsTime==6){
-        itsTime=diceRoll();
-        player1(itsTime);
+        turn.innerText= "aggain P1 turn";
+        setTimeout(()=>{
+            itsTime=diceRoll();
+            player1(itsTime);
+        },2000);
     }
-    turn.innerText="P2 turn"
+    turn.innerText="P2 turn";
     bool=false;
+    defi();
 }
 function player2(itsTime){
     if(cp2+itsTime>100){
@@ -114,18 +144,23 @@ function player2(itsTime){
     if(cp2==51)cp2=79;
     if(cp2==98)cp2=7;
     if(cp2==69)cp2=33;
-    arr[cp2].innerText += "P2";
+    arr[cp2].innerText += "\nP2";
     
-    if(cp1==cp2 && cp1!=0){
-        arr[cp1].innerText=cp1;
-        cp1=0;
+    if(cp1==cp2 && cp1!=1){
+        arr[cp1].innerText=cp1 + "\nP2";
+        cp1=1;
+        arr[cp1].innerText += "\nP1";
     }
     if(itsTime==6){
-        itsTime=diceRoll();
-        player2(itsTime);
+        turn.innerText= "aggain P2 turn";
+        setTimeout(()=>{
+            itsTime=diceRoll();
+            player2(itsTime);
+        },2000);
     }
     turn.innerText="P1 turn";
     bool=true;
+    defi();
 }
 dice.addEventListener("click",()=>{
     let itsTime=diceRoll();
